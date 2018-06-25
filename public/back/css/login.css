@@ -1,0 +1,14 @@
+.body_bg {
+    background-color: #222D32;
+}
+.login {
+    margin-top: 150px;
+}
+.panel_header {
+    height: 50px;
+    border-bottom: 1px solid #B9C1A3;
+    line-height: 49px;
+    text-align: center;
+    font-size: 20px;
+    color: #FFFFFF;
+}
