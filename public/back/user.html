@@ -9,8 +9,13 @@
     <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="lib/nprogress/nprogress.css">
     <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/index.css">
-
+    <style>
+        .table.table-bordered th,
+        .table.table-bordered td {
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
 </head>
 <body>
 <!--侧边栏-->
@@ -31,7 +36,7 @@
                 <a href="./user.html" class="current"><i class="glyphicon glyphicon-user"></i><span>用户管理</span></a>
             </li>
             <li>
-                <a href="javascript:;"  class="secondnav"><i class="glyphicon glyphicon-list"></i><span>分类管理</span></a>
+                <a href="javascript:;" class="secondnav"><i class="glyphicon glyphicon-list"></i><span>分类管理</span></a>
                 <ul class="child" style="display: none">
                     <li><a href="./first.html">一级分类</a></li>
                     <li><a href="./second.html">二级分类</a></li>
@@ -47,7 +52,8 @@
 <!--头部区域-->
 <div class="lt_topbar">
     <a href="javascript:;" class="pull-left icon_menu"><i class="glyphicon glyphicon-align-justify"></i></a>
-    <a href="#" class="pull-right icon_logout" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-log-out"></i></a>
+    <a href="#" class="pull-right icon_logout" data-toggle="modal" data-target="#myModal"><i
+        class="glyphicon glyphicon-log-out"></i></a>
 </div>
 <!--主体-->
 <div class="lt_main">
@@ -57,9 +63,35 @@
             
             <li class="active">用户管理</li>
         </ol>
+        <!--表格-->
+        <table class="table table-bordered table-hover text-center">
+            <thead>
+            <tr>
+                <th>序号</th>
+                <th>用户名</th>
+                <th>手机号</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>itcast</td>
+            <td>15102324243</td>
+            <td>正常</td>
+            <td>
+                <button class="btn btn-danger">禁用</button>
+            </td>
+        </tr>
+        </tbody>
+        </table>
+        <div class="text-right">
+            <ul id="paginator"></ul>
+        </div>
     </div>
-</div>
 
+</div>
 
 
 <!--模态框-->
@@ -69,7 +101,8 @@
     <div class="modal-dialog  modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
+                </button>
                 <h4 class="modal-title" id="myModalLabel">温馨提醒</h4>
             </div>
             <div class="modal-body colorRed">
@@ -82,12 +115,53 @@
         </div>
     </div>
 </div>
+<!--模态框2-->
+<div class="modal fade" id="myModal2">
+    <div class="modal-dialog  modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel2">温馨提醒</h4>
+            </div>
+            <div class="modal-body colorRed">
+                <i class="glyphicon glyphicon-info-sign"></i><span>你确定要执行此操作吗？</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary isDelete">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--渲染引擎-->
+<script type="text/template" id="tmp">
+{{ each rows v i }}
+<tr>
+    <td>{{ (page-1) * size + (i+1) }}</td>
+    <td>{{ v.username }}</td>
+    <td>{{ v.mobile }}</td>
+    <td>{{ v.isDelete==1?"正常":"禁用" }}</td>
+    <td data-id="{{ v.id }}" data-isdele="{{ v.isDelete }}">
+        {{ if v.isDelete==1 }}
+        <button class="btn btn-danger operate">禁用</button>
+        {{ /if }}
+        {{ if v.isDelete==0 }}
+        <button class="btn btn-success operate">启用</button>
+        {{ /if }}
+    </td>
+</tr>
+    {{ /each }}
+
+</script>
 
 <script src="lib/jquery/jquery.js"></script>
 <script src="lib/bootstrap/js/bootstrap.js"></script>
 <script src="lib/nprogress/nprogress.js"></script>
+<script src="lib/artTemplate/template-web.js"></script>
+<script src="lib/bootstrap-paginator/bootstrap-paginator.min.js"></script>
 <script src="js/common.js"></script>
-<script src="js/index.js"></script>
+<script src="./js/user.js"></script>
 
 </body>
 </html>
